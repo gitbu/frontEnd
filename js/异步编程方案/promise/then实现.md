@@ -18,16 +18,28 @@
           }
         }
         function errback(reason){
-          reason = isFunction(onRejected) && onRejected(reason) || reason;
-          reject(reason);
+          if(isFunction(onRejected)) {
+              const res = onRejected(reason);
+              if(res instanceof MyPromise) {
+                  res.then(resolve, reject);
+              } else {
+                  resolve(res);
+              }
+          } else {
+              reject(reason);
+          }
         }
-        if(promise._status === PENDING){
-          promise._resolves.push(callback);
-          promise._rejects.push(errback);
-        }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
-          callback(promise._value);
-        }else if(promise._status === REJECTED){
-          errback(promise._reason);
+        try {
+          if(promise._status === PENDING){
+            promise._resolves.push(callback);
+            promise._rejects.push(errback);
+          }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
+            callback(promise._value);
+          }else if(promise._status === REJECTED){
+            errback(promise._reason);
+          }
+        } catch(err) {
+          reject(err);
         }
     });
   }

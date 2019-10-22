@@ -17,6 +17,7 @@
   
   var transition = function(status,value){
     var promise = this;
+    // 确保Promise要么成功要么失败只有一个状态
     if(promise._status !== PENDING) return;
     // 这里之所以用setTimeout，是为了保证then先执行
     setTimeout(function(){
