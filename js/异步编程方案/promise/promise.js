@@ -53,7 +53,11 @@
       transition.apply(promise,[REJECTED].concat([reason]));
     }
     
-    resolver(resolve,reject);
+    try {
+      resolver(resolve,reject);
+    } catch(err) {
+      reject(err)
+    }
   }
   
   Promise.prototype.then = function(onFulfilled,onRejected){
@@ -76,13 +80,17 @@
           reason = isFunction(onRejected) && onRejected(reason) || reason;
           reject(reason);
         }
-        if(promise._status === PENDING){
-          promise._resolves.push(callback);
-          promise._rejects.push(errback);
-        }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
-          callback(promise._value);
-        }else if(promise._status === REJECTED){
-          errback(promise._reason);
+        try {
+          if(promise._status === PENDING){
+            promise._resolves.push(callback);
+            promise._rejects.push(errback);
+          }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
+            callback(promise._value);
+          }else if(promise._status === REJECTED){
+            errback(promise._reason);
+          }
+        } catch(err) {
+          reject(err)
         }
     });
   }
