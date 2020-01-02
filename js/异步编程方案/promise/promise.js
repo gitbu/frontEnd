@@ -65,32 +65,44 @@
     // 每次返回一个promise，保证是可thenable的
     return Promise(function(resolve,reject){
         function callback(value){
-          var ret = isFunction(onFulfilled) && onFulfilled(value) || value;
-          if(isThenable(ret)){
-            ret.then(function(value){
-               resolve(value);
-            },function(reason){
-               reject(reason);
-            });
-          }else{
-            resolve(ret);
+          try {
+            var ret = isFunction(onFulfilled) && onFulfilled(value) || value;
+            if(isThenable(ret)){
+              ret.then(function(value){
+                 resolve(value);
+              },function(reason){
+                 reject(reason);
+              });
+            }else{
+              resolve(ret);
+            }
+          } catch (err) {
+            renject(err)
           }
         }
         function errback(reason){
-          reason = isFunction(onRejected) && onRejected(reason) || reason;
-          reject(reason);
+          try {
+            if(isFunction(onRejected)) {
+              const res = onRejected(reason);
+              if(isThenable(ret)) {
+                res.then(resolve, reject);
+              } else {
+                resolve(res);
+              }
+            } else {
+              reject(this._value);
+            }
+          } catch (err) {
+            reject(err)
+          }  
         }
-        try {
-          if(promise._status === PENDING){
-            promise._resolves.push(callback);
-            promise._rejects.push(errback);
-          }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
-            callback(promise._value);
-          }else if(promise._status === REJECTED){
-            errback(promise._reason);
-          }
-        } catch(err) {
-          reject(err)
+        if(promise._status === PENDING){
+          promise._resolves.push(callback);
+          promise._rejects.push(errback);
+        }else if(promise._status === FULFILLED){ // 状态改变后的then操作，立刻执行
+          callback(promise._value);
+        }else if(promise._status === REJECTED){
+          errback(promise._reason);
         }
     });
   }
