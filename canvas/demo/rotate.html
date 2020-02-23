@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<canvas id="demo" height="500" width="500"></canvas>
+<script>
+  _canvas = document.querySelector('#demo');
+  ctx = _canvas.getContext('2d');
+  //rotate
+  ctx.fillStyle="red"
+  ctx.fillRect(100, 100, 100, 100);
+  ctx.fillStyle="blue"
+  ctx.rotate(Math.PI/18)
+  ctx.fillRect(100, 100, 100, 100);
+  ctx.fillStyle="yellow"
+  ctx.fillRect(200, 200, 100, 100);
+</script>
+</body>
+</html>

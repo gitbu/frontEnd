@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+<canvas id="demo"></canvas>
+<script>
+  _canvas = document.querySelector('#demo');
+  ctx = _canvas.getContext('2d');
+  //translate
+  ctx.strokeStyle = "red";
+  ctx.moveTo(50, 0);
+  ctx.lineTo(25, 75);
+  ctx.lineTo(85, 25);
+  ctx.lineTo(15, 25);
+  ctx.lineTo(75, 75);
+  ctx.lineTo(50, 0);
+  ctx.stroke();
+</script>
+</body>
+</html>
