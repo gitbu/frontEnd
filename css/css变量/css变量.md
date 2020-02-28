@@ -48,21 +48,39 @@ body {
 与css的层叠规则是一样的，一样具有`继承性`
 
 ```html
-<style>
-  :root { --color: blue; }
-  div { --color: green; }
-  #alert { --color: red; }
-  * { color: var(--color); }
-</style>
+<html>
+  <head>
+    <style>
+      :root { --color: blue; }
+      div { --color: green; }
+      #alert { --color: red; }
+      * { color: var(--color); }
+     </style>
+  </head>
+  <body>
+     <p>蓝色</p>
+		 <div>绿色</div>
+		  <div id="alert">红色</div>
+  </body>
+</html>
 
-<p>蓝色</p>
-<div>绿色</div>
-<div id="alert">红色</div>
+
+
 ```
 
-
+<iframe
+     src="https://codesandbox.io/embed/wonderful-platform-ql6f4?fontsize=14&hidenavigation=1&theme=dark"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="wonderful-platform-ql6f4"
+     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+   ></iframe>
 
 
 
 ## 三、兼容性
+
+除了IE不支持以为，剩余的大部分都支持
+
+[查看兼容性](https://www.caniuse.com/#search=var())
 
