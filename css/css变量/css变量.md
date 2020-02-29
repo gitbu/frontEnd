@@ -64,27 +64,15 @@ body {
   </body>
 </html>
 
-
-
 ```
-
-<iframe
-     src="https://codesandbox.io/embed/wonderful-platform-ql6f4?fontsize=14&hidenavigation=1&theme=dark"
-     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
-     title="wonderful-platform-ql6f4"
-     allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
-     sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-  />
-
-
-
-
-
-
 
 ## 三、兼容性
 
 除了IE不支持以为，剩余的大部分都支持
 
 [查看兼容性](https://www.caniuse.com/#search=var())
+
+
+<a style="color: red">fff</a>
+
 
