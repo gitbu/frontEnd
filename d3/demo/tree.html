@@ -1,0 +1,221 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>树状图</title>
+    <style>
+        .node circle {
+            fill: #fff;
+            stroke: steelblue;
+            stroke-width: 1.5px;
+        }
+
+        .node {
+            font: 12px sans-serif;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 1.5px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="http://d3js.org/d3.v5.min.js"></script>
+    <script>
+        var width = 500,
+            height = 500;
+        var data = {
+            "name": "中国",
+            "children": [{
+                "name": "浙江",
+                "children": [{
+                    "name": "杭州"
+                },
+                {
+                    "name": "宁波"
+                },
+                {
+                    "name": "温州"
+                },
+                {
+                    "name": "绍兴"
+                }
+                ]
+            },
+
+            {
+                "name": "广西",
+                "children": [{
+                    "name": "桂林",
+                    "children": [{
+                        "name": "秀峰区"
+                    },
+                    {
+                        "name": "叠彩区"
+                    },
+                    {
+                        "name": "象山区"
+                    },
+                    {
+                        "name": "七星区"
+                    }
+                    ]
+                },
+                {
+                    "name": "南宁"
+                },
+                {
+                    "name": "柳州"
+                },
+                {
+                    "name": "防城港"
+                }
+                ]
+            },
+
+            {
+                "name": "黑龙江",
+                "children": [{
+                    "name": "哈尔滨"
+                },
+                {
+                    "name": "齐齐哈尔"
+                },
+                {
+                    "name": "牡丹江"
+                },
+                {
+                    "name": "大庆"
+                }
+                ]
+            },
+
+            {
+                "name": "新疆",
+                "children": [{
+                    "name": "乌鲁木齐"
+                },
+                {
+                    "name": "克拉玛依"
+                },
+                {
+                    "name": "吐鲁番"
+                },
+                {
+                    "name": "哈密"
+                }
+                ]
+            }
+            ]
+        };
+        var width = 1000,
+            height = 1000;
+        const tree = data => {
+            const width = 800;
+            const root = d3.hierarchy(data);
+            root.dx = 20;
+            root.dy = width / (root.height + 1);
+            return d3.tree().nodeSize([50, 100])(root);
+        }
+
+        const root = tree(data)
+        let x0 = Infinity;
+        let x1 = -x0;
+        root.each(d => {
+            if (d.x > x1) x1 = d.x;
+            if (d.x < x0) x0 = d.x;
+        });
+
+        // 定义矩形的宽高，折线据此确定横纵坐标
+        var boxWidth = 65, boxHeight = 40;
+
+        var diagonal = (d) => {
+            const height = d.source.depth > 1 ? boxWidth : boxHeight
+            let sourceX = d.source.x,
+                sourceY = d.source.y + height,
+                targetX = d.target.x,
+                targetY = d.target.y;
+
+            return "M" + sourceX + "," + sourceY +
+                "V" + ((targetY - sourceY) / 2 + sourceY) +
+                "H" + targetX +
+                "V" + targetY;
+
+        }
+
+        var zoom = d3.zoom()
+            .on('zoom', function () {
+                    svg.attr("transform", "scale(" + d3.event.scale + ")");
+            });
+
+        var draged = d3.drag()
+        .on('drag', function (d) {
+            console.log('@@@@@@', d3.event);
+            svg.attr("transform",  `translate(${d3.event.x}, ${d3.event.y})`);
+        })
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            //.call(zoom)
+            .call(draged)
+
+
+        var nodes = root.descendants();
+        var links = root.links();
+
+        console.log(nodes);
+        console.log(links);
+
+        const g = svg.append("g")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 10)
+            .attr("transform", `translate(${width/2}, 10)`);
+
+        const link = g.append("g")
+            .attr("fill", "none")
+            .attr("stroke", "#555")
+            .attr("stroke-opacity", 0.4)
+            .attr("stroke-width", 1.5)
+            .selectAll("path")
+            .data(root.links())
+            .join('path')
+            .attr("d", diagonal);
+
+        const node = g.append("g")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-width", 3)
+            .selectAll("g")
+            .data(root.descendants())
+            .join("g")
+            .attr("transform", d => `translate(${d.x},${d.y})`);
+
+        node.append("rect")
+            .attr('width', d => d.depth > 1 ? boxHeight : boxWidth)
+            .attr('height', d => d.depth > 1 ? boxWidth : boxHeight)
+            .attr('x', d =>  d.depth > 1 ? -boxHeight/2 :  -boxWidth/2)
+            .attr('y', 0)
+            .style('fill', 'none')
+            .attr('stroke-width', 1)
+            .attr('stroke', 'blue')
+
+
+        node.append("text")
+            .attr("dy", "0.31em")
+            .attr("y", d => d.depth > 1 ? 0 : boxHeight/2)
+            .attr('style', d => {
+                if (d.depth > 1) {
+                    return "writing-mode: tb;letter-spacing:0px"
+                }
+            })
+            .attr("text-anchor", d => d.depth > 1 ? "start" : "middle")
+            .text(d => d.data.name)
+            .clone(true).lower()
+            .attr("stroke", "white");
+    </script>
+</body>
+
+</html>
