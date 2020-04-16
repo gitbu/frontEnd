@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="smile" />
+</body>
+  <script>
+    const ele = document.querySelector('#smile')
+    ele.style.backgroundColor = 'green';
+    const ctx = ele.getContext('2d');
+
+    ctx.moveTo(10, 10);
+    ctx.strokeStyle = 'red';
+    ctx.lineTo(10, 100);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.strokeStyle = 'blue';
+    ctx.moveTo(10, 100);
+    ctx.lineTo(100, 100);
+    ctx.closePath();
+    ctx.stroke();
+  
+
+    //脸
+    ctx.arc(150, 75, 50, 0, 2*Math.PI)
+    ctx.stroke();
+
+    //眼睛
+    ctx.strokeStyle = 'blue'
+    //ctx.beginPath();
+    ctx.arc(130, 50, 10, 0, 2*Math.PI)
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(170, 50, 10, 0, 2*Math.PI)
+    ctx.stroke();
+
+    //嘴巴
+    ctx.beginPath();
+    ctx.arc(150, 75, 35, 0, Math.PI)
+    ctx.stroke();
+
+  </script>
+</html>
