@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <svg height="500" width="500">
+    <!--------------------------形状------------------------------>
+    <!--矩形-->
+    <rect x="0" y="0" width="100" height="100" fill="red" stroke="black" />
+    <!--圆-->
+    <circle cx="50" cy="150" r="50" fill="blue" />
+    <!--椭圆-->
+    <ellipse cx="50" cy="225" rx="50" ry="25" fill="purple" />
+    <!--直线-->
+    <line x1="0" y1="275" x2="100" y2="275" stroke="green" />
+    <!--折现-->
+    <polyline points="0 400, 50,300, 100, 400" stroke="black" />
+    <!--------------------------路径------------------------------>
+    <!--直线-->
+    <path d="M 110 0 H 210 V 100 H 110 z" fill="yellow" />
+    <!--二次贝塞尔曲线-->
+    <path d="M 110 160 Q 135 110 160 160" stroke="blue" fill="transparent"/>
+    <path d="M 110 220 Q 135 170 160 220 T 210 220" stroke="blue" fill="transparent"/>
+    <!--圆弧-->
+    <path d="M 135 305
+             A 50 50, -45, 0, 1, 185 305
+             L 160 330 Z 
+            "
+          fill="red"
+    />
+    
+    <!--------------------------上色------------------------------>
+    <!--上色不透明度-->
+    <rect x="220" y="0" width="40" height="40" fill="pink" fill-opacity="0.5" />
+    <!--使用css设置-->
+    <rect x="270" y="0" width="40" height="40" style="fill:pink;fill-opacity:0.5;" />
+    <!--------------------------描边------------------------------>
+    <!--线的连接样式设置-->
+    <polyline points="220 180 270 120 320 180" stroke-width="20" stroke="black" fill="transparent" stroke-linecap="butt" />
+    <polyline points="220 280 270 220 320 280" stroke-width="20" stroke="black" fill="transparent" stroke-linecap="round" stroke-linejoin="round"/>
+    <!--虚线设置-->
+    <path d="M 220 320 L 320 320" stroke-dasharray="5, 5" stroke="red" stroke-width="5" />
+  </svg>
+  
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <svg>
+    <!--g标签-->
+    <g id="rc" fill="red" stroke="blue" stoke-width:="10">
+      <rect x="0" y="0" width="50" height="50"/>
+      <circle r="25" cx="25" cy="75" />
+    </g>
+    <!--defs标签-->
+    <defs>
+      <ellipse id="el" cx="80" cy="25" rx="25" ry="10" fill="blue" />
+    </defs>
+    <use xlink:href="#rc" x="60" y="0" />
+    <use xlink:href="#el" x="60" y="0" />
+  </svg>
+  
+</body>
+</html>
