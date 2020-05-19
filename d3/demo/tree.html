@@ -147,9 +147,9 @@
         }
 
         var zoom = d3.zoom()
-            .on('zoom', function () {
-                    svg.attr("transform", "scale(" + d3.event.scale + ")");
-            });
+            // .on('zoom', function () {
+            //         svg.attr("transform", "scale(" + d3.event.scale + ")");
+            // });
 
         var draged = d3.drag()
         .on('drag', function (d) {

@@ -3,7 +3,7 @@
 ```js
 const [{ canDrop, isOver }, drop] = useDrop({
     accept: ItemTypes.BOX,
-    drop: () => ({
+    drop: (item) => ({
       name: `${allowedDropEffect} Dustbin`,
       allowedDropEffect,
     }),
@@ -23,3 +23,8 @@ const [{ canDrop, isOver }, drop] = useDrop({
 * （Array)
   * 0：就是传入的collect的返回值
   * 1：是一个连接放置元素的连接器，需要绑定在放置元素的ref上
+
+####item:
+
+​	item是指在使用`useDrag`传入的Item参数
+
