@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>full screen</title>
+    <style>
+      #myvideo {
+        width: 500px;
+        height: 500px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myvideo">
+    </div>
+  <script>
+    var fullScreen = document.querySelector('#myvideo')
+    if (fullScreen.webkitRequestFullscreen) {
+      console.log(222)
+      fullScreen.webkitRequestFullscreen()
+    }
+  </script>
+  </body>
+</html>

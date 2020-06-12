@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>full screen</title>
+    <style>
+      #myvideo {
+        width: 100px;
+        height: 100px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myvideo">
+    </div>
+  <script>
+    var start = null;
+		var element = document.getElementById('myvideo');
+		element.style.position = 'absolute';
+
+		function step(timestamp) {
+		  if (!start) start = timestamp;
+		  var progress = timestamp - start;
+      console.log(timestamp)
+		  element.style.left = Math.min(progress / 10, 200) + 'px';
+		  if (progress < 2000) {
+		    window.requestAnimationFrame(step);
+		  }
+		}
+
+window.requestAnimationFrame(step);
+  </script>
+  </body>
+</html>

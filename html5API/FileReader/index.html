@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+  <head>
+    <title>FileReader</title>
+    <style>
+      #filebox {
+        width: 150px;
+        height: 40px;
+        position: relative;
+      }
+      input {
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+      #upload {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: #9adf49;
+        z-index: -1;
+      }
+      input:hover {
+        cursor: pointer;
+      }
+      #upload span {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="filebox">
+      <input id="files" type="file" />
+      <div id="upload"><span>上传文件</span></div>
+      <progress min='0' max='100' id='progress' value='0'></progress>
+    </div>
+    <div id='output'></div>
+  <script>
+   const myfile = document.querySelector('#files')
+    const output = document.querySelector('#output')
+    const progress = document.querySelector('#progress') 
+    myfile.addEventListener('change', (e) => {
+      const ele = e.target
+      const file = ele.files[0]
+      var render = new FileReader()
+      render.onabort = () => {}
+      render.onerror = (err) => { console.log(err) }
+      render.onloadstatr = () => {}
+
+      render.onload = () => {
+        var mydiv = document.createElement('div')
+        mydiv.innerHTML = `<img width=200 src=${render.result} />${file.name}`
+        output.appendChild(mydiv)
+      }
+
+      render.onprogress = (load) => {
+        const { loaded, total } = load;
+        console.log(Math.ceil((loaded/total)*100))
+        progress.value = Math.ceil((loaded/total)*100);
+      }
+
+      render.onloadend = () => {}
+
+      render.readAsDataURL(file)
+    }, false) 
+    /*summarize*/
+    /*
+      1、三个属性：error、readyState、result
+      2、五个方法：abort、readAsText、readAsDataURL
+      3、六个事件 onabort、onload、onloadstart、onloadend、onerror、onprogress
+    */
+  </script>
+  </body>
+</html>

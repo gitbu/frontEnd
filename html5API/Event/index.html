@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>dispatch event</title>
+  </head>
+  <body>
+    <div onclick="clickme()">click me</div>
+    <script>
+      function clickme() { alert(3333) }
+      var event = new CustomEvent('say')
+      window.addEventListener('say', () => {
+        console.log('hello world')
+      }, false)
+      window.addEventListener('say', () => {
+        console.log('my name is bap')
+      }, false)
+      window.dispatchEvent(event)
+    </script>
+  </body>
+</html>

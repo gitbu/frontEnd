@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>拖拽</title>
+	  <style>
+	  	 #draggable {
+       	width: 200px;
+       	height: 20px;
+       	text-align: center;
+       	background: white;
+    	 }
+    	.dropzone {
+    	  width: 200px;
+    	  height: 20px;
+    	  background: blueviolet;
+    	  margin-bottom: 10px;
+    	  padding: 10px;
+    	}
+	  </style>
+  </head>
+  <body>
+		<div class="dropzone">
+    	<div id="draggable" draggable="true" >
+    	    This div is draggable
+    	</div>
+		</div>
+		<div class="dropzone"></div>
+		<div class="dropzone"></div>
+		<div class="dropzone"></div>
+    <script>
+			var opacity = .5;
+			var background = 'purple';
+			document.addEventListener('dragstart', (e) => {
+        console.log('dragstart')
+				e.target.style.opacity = opacity
+				e.dataTransfer.setData('text/plain', e.target.id)
+			})
+      document.addEventListener('drag', (e) => {
+        console.log('drag')
+      })
+			document.addEventListener('dragenter', (e) => {
+        e.stopPropagation()
+        console.log('dragenter')
+				if (e.target.className === 'dropzone') {
+					e.target.style.background = background
+				}
+			})
+			document.addEventListener('dragleave', (e) => {
+        console.log('dragleave')
+        e.stopPropagation()
+				if (e.target.className === 'dropzone') {
+					e.target.style.background = ''
+				}
+			})
+			document.addEventListener('dragover', (e) => {
+        console.log('dragover')
+				//e.preventDefault()
+				//console.log(e)
+			})
+			document.addEventListener('dragend', (e) => {
+        console.log('dragend');
+				e.target.style.opacity = ''
+			})
+			document.addEventListener('drop', (e) => {
+        console.log('drop')
+				e.target.style.background = ''
+				var data = e.dataTransfer.getData('text/plain')
+				var dragedNode = document.querySelector(`#${data}`)
+				e.target.appendChild(dragedNode)
+			})
+      // summarize
+      /*
+      1、事件触发顺序：dragstart->drag->dragover->dragenter->dragleave->drop->drapend
+      2、触发事件对象：
+        1）拖动元素：dragstart、drag、dragend
+        2）放置元素：dragover、dragenter、dragleave、drop
+      3、注意事项：应为浏览器默认是不允许元素或数据放置到其他元素里的，所以在dragover里要阻止默认行为
+      */
+    </script>
+  </body>
+</html>
