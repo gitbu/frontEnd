@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <header>
+    <title>前端下载</title>
+  </header>
+  <body>
+    <a href="" >download</a>
+    <script>
+      const ele = document.querySelector('a')
+      ele.download = 'a.txt'
+      const blob = new Blob(["hello world\nnihao"])
+      ele.href = URL.createObjectURL(blob)
+      //ele.href = "data:, hello world\nnihao"
+      /*
+      blob 对象:Blob对象可以看做是存放二进制数据的容器
+      创建blob
+      var blob = new Blob(dataArr:Array<any>, opt:{type:string});
+      参数一：数组
+      参数二：对象， 用于设置blob对象的属性(例如mime类型)
+      */
+    </script>
+  </body>
+</html>

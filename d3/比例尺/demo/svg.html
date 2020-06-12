@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      width: 100px;
+      border: 1px solid red;
+    }
+  </style>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+  
+  <svg id="svg" height="300" width="200">
+  </svg>
+  <script>
+    const height = 500;
+    const width = 200;
+    const padding = {
+      top: 30,
+      bottom: 30,
+      left: 50,
+      right: 50, 
+    }
+
+    const yScale = d3.scaleLinear()
+      .domain([0, 100])
+      .range([0, height])
+
+
+    const yAxis = d3.axisLeft(yScale);
+
+    d3.select('svg')
+      .append('g')
+      .attr('transform', `translate(${padding.left}, ${height - padding.bottom})`)
+      .call(yAxis)
+
+  </script>
+</body>
+</html>

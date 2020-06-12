@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <header>
+    <title>Websoket</title>
+  </header>
+  <body>
+    <script>
+      const socket = new WebSocket('ws://127.0.0.1:2000')
+      socket.addEventListener('open', (event) => {
+        socket.send('hello server')
+      })
+      socket.addEventListener('message', (event) => {
+        console.log('message data', event.data)
+      })
+    </script>
+  </body>
+</html>
