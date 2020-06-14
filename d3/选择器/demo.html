@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</head>
+<body>
+  <script>
+    const data = [1, 2, 4]
+    d3.select('body').selectAll('p')
+      .data(data)
+      .enter()
+      .append('p')
+      .style('color', (a, index, c) => { console.log(index)})
+      .text(d => d)
+
+  </script>
+  
+</body>
+</html>
