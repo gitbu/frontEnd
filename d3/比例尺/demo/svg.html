@@ -15,7 +15,7 @@
 </head>
 <body>
   
-  <svg id="svg" height="300" width="200">
+  <svg id="svg" height="500" width="200">
   </svg>
   <script>
     const height = 500;
@@ -29,14 +29,14 @@
 
     const yScale = d3.scaleLinear()
       .domain([0, 100])
-      .range([0, height])
+      .range([height - padding.bottom, padding.top])
 
 
     const yAxis = d3.axisLeft(yScale);
 
     d3.select('svg')
       .append('g')
-      .attr('transform', `translate(${padding.left}, ${height - padding.bottom})`)
+      .attr('transform', `translate(${padding.left}, 0)`)
       .call(yAxis)
 
   </script>
