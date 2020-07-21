@@ -2,11 +2,30 @@
 
 ## Dom 元素的尺寸
 
-### offset
+### offsetWidth
 
 offsetWidth = border + padding + width
 
-### client
+### clientWidth
 
-clientWidth = padding + width - 滚动条的宽度
+clientWidth = padding + width
 
+### scrollWidth
+
+获取对象的滚动宽度
+
+### scrollTop
+
+这个元素的**内容顶部**（卷起来的）到它的视口可见内容（的顶部）的距离的度量
+
+
+
+## 元素位置
+
+### getBoundingClientRect
+
+元素的大小及其相对于视口的位置。
+
+### offsetLeft和offsetTop
+
+是指元素相对于其offsetParent指定的坐标来说
