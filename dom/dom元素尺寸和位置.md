@@ -29,3 +29,7 @@ clientWidth = padding + width
 ### offsetLeft和offsetTop
 
 是指元素相对于其offsetParent指定的坐标来说
+
+###元素距离文档的高度
+
+> h = document.documentElement.scrollTop + el.getBoudingClientRect().top
