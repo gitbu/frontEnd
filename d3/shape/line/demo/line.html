@@ -18,28 +18,16 @@
   <svg id="svg" height="500" width="200">
   </svg>
   <script>
-    const height = 500;
-    const width = 200;
-    const padding = {
-      top: 30,
-      bottom: 30,
-      left: 50,
-      right: 50, 
-    }
+    const data = Array.from({length: 10}, (d, i) => i++);
 
-    const yScale = d3.scaleLinear()
-      .domain([0, 100])
-      .range([height-padding.bottom, padding.top])
+    const line = d3.line()
+      .x(d => d)
+      .y(d => d)
+  
 
-
-    const yAxis = d3.axisLeft(yScale)
-      .ticks(5, '$')
-
-    d3.select('svg')
+    d3.select('#svg')
       .append('g')
-      .attr('transform', `translate(${padding.left}, 0)`)
-      .call(yAxis)
-
+      .append('path', line(data))
   </script>
 </body>
 </html>
