@@ -1,0 +1,9 @@
+## await的返值
+就是后面promise传给resolve的内容
+
+## async 的返回值
+返回的是一个promise
+
+promise的then回调中参数的值
+如果async函数返回的是一个promise,那么，then回调中参数的值是这个promise的resole的值
+如果async函数返回的不是一个promise,那么，then回调中参数的值是这个async函数的return的内容
